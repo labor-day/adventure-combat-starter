@@ -1,3 +1,6 @@
+// const { World } = require('./world');
+const { Player } = require('./player');
+
 class Room {
 
   constructor(name, description) {
@@ -51,15 +54,38 @@ class Room {
     return this.exits[direction];
   }
 
+  findItemInInventory(name) {
+    let inventory = this.items;
+    for (let i = 0; i < inventory.length; i++) {
+      if (inventory[i].name === name) {
+        return i;
+      }
+    }
+  }
+
   getItemByName(name) {
 
     // Fill this in
+    return this.items[this.findItemInInventory(name)];
+
+  }
+
+  removeItem(name) {
+    let index = this.findItemInInventory(name);
+    this.items.splice(index, 1);
 
   }
 
   getEnemyByName(name) {
 
     // Fill this in
+    let enemies = this.getEnemies();
+    for (let i = 0; i < enemies.length; i++) {
+      if (enemies[i].name === name) {
+        return enemies[i];
+      }
+    }
+  }
 
 }
 

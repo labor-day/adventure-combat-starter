@@ -33,33 +33,59 @@ class Player extends Character {
     }
   }
 
-  takeItem(itemName) {
+  applyDamage(amount) {
+    super.applyDamage(amount);
+    if (this.health <= 0) {
+      this.die();
+    }
+  }
 
-    // Fill this in
+  takeItem(itemName) {
+    let item = this.currentRoom.getItemByName(itemName);
+    this.items.push(item);
+    this.currentRoom.removeItem(itemName);
 
   }
 
   dropItem(itemName) {
-
     // Fill this in
+    this.currentRoom.items.push(this.getItemByName(itemName));
+    let index = this.findItemInInventory(itemName);
+    this.items.splice(index, 1);
 
   }
 
   eatItem(itemName) {
 
     // Fill this in
+    let item = this.getItemByName(itemName);
+    if (item instanceof Food) {
+      this.items.splice(this.findItemInInventory(itemName), 1);
+    }
 
+  }
+
+  findItemInInventory(name) {
+    let inventory = this.items;
+    for (let i = 0; i < inventory.length; i++) {
+      if (inventory[i].name === name) {
+        return i;
+      }
+    }
   }
 
   getItemByName(name) {
 
     // Fill this in
+    return this.items[this.findItemInInventory(name)];
 
   }
 
   hit(name) {
 
     // Fill this in
+    let target = this.currentRoom.getEnemyByName(name);
+    target.attackTarget = this;
 
   }
 
