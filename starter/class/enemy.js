@@ -72,7 +72,7 @@ class Enemy extends Character {
       this.rest();
     } else {
       this.scratchNose();
-      this.rest();
+      //this.rest();
     }
 
     // Fill this in

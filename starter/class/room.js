@@ -24,6 +24,7 @@ class Room {
     console.log("");
     if (this.getEnemies().length > 0) {
       console.log(`Enemies: ${this.getEnemies().map(enemy => enemy.name).join(", ")}`);
+      console.log("Enter 'hit <enemy>' to attack");
     }
     if (this.items.length > 0) {
       console.log(`Items: ${this.items.map(item => item.name).join(", ")}`);
